@@ -18,7 +18,7 @@ class Commentaires
     private ?string $contenu = null;
 
     #[ORM\Column]
-    private ?bool $active = null;
+    private ?bool $active = false;
 
     #[ORM\Column(length: 255)]
     private ?string $email = null;
