@@ -7,6 +7,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: MarieeRepository::class)]
 class Mariee
@@ -15,9 +17,23 @@ class Mariee
     #[ORM\GeneratedValue]
     #[ORM\Column()]
     private ?int $id = null;
-
+/**
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Votre Nom ne doit pas contenir de chiffre"
+     * )
+     */
     #[ORM\Column(length: 50)]
     private ?string $nom = null;
+
+    /**
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Votre prenom ne doit pas contenir de chiffre"
+     * )
+     */
 
     #[ORM\Column(length: 50)]
     private ?string $prenom = null;
@@ -30,7 +46,12 @@ class Mariee
 
     #[ORM\Column(length: 14)]
     private ?string $telephone = null;
-
+    
+    /** 
+     *  @Assert\GreaterThan("+10 days",
+     * message="La date du mariage doit etre superieure a 10 jours ")
+     * 
+     */
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $dateMariage = null;
 

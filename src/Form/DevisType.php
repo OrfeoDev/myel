@@ -25,7 +25,8 @@ class DevisType extends AbstractType
             ->add('telephone',NumberType::class, ['label' => 'Numero de de telephone'])
             ->add('dateMariage',DateType::class,[
                 'widget' => 'single_text',])
-            ->add('descriptif',CKEditorType::class, ['label' => 'Description courte et adresse du lieu de mariage']);
+                ->add('descriptif',TextareaType::class, ['label' => 'Description courte et adresse du lieu de mariage']);
+            // ->add('descriptif',CKEditorType::class, ['label' => 'Description courte et adresse du lieu de mariage']);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
