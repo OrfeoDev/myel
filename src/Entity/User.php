@@ -30,6 +30,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $fullName = null;
 
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?Mariee $mariee = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -127,6 +130,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setFullName(string $fullName): self
     {
         $this->fullName = $fullName;
+
+        return $this;
+    }
+
+    public function getMariee(): ?Mariee
+    {
+        return $this->mariee;
+    }
+
+    public function setMariee(?Mariee $mariee): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($mariee === null && $this->mariee !== null) {
+            $this->mariee->setUser(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($mariee !== null && $mariee->getUser() !== $this) {
+            $mariee->setUser($this);
+        }
+
+        $this->mariee = $mariee;
 
         return $this;
     }

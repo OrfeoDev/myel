@@ -18,11 +18,11 @@ class DemandeStatut
     #[ORM\Column(length: 255)]
     private ?string $libelle = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $valeur = null;
-
     #[ORM\OneToMany(mappedBy: 'demandeStatut', targetEntity: Mariee::class)]
     private Collection $mariee;
+
+    #[ORM\Column(length: 255)]
+    private ?string $value = null;
 
     public function __construct()
     {
@@ -45,18 +45,19 @@ class DemandeStatut
 
         return $this;
     }
-
-    public function getValeur(): ?string
+    public function getValue(): ?string
     {
-        return $this->valeur;
+        return $this->value;
     }
 
-    public function setValeur(string $valeur): self
+    public function setValue(string $value): self
     {
-        $this->valeur = $valeur;
+        $this->value = $value;
 
         return $this;
     }
+    
+
 
     /**
      * @return Collection<int, Mariee>
@@ -87,4 +88,6 @@ class DemandeStatut
 
         return $this;
     }
+
+   
 }

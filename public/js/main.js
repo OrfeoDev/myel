@@ -325,3 +325,15 @@ jQuery(document).ready(function($) {
 
 
 });
+
+let article = document.querySelector('article');
+let h1 = document.querySelector('h1');
+
+article.addEventListener('click', ()=> {
+	alert('alerte clique');
+});
+
+h1.addEventListener('click', (e ) => {
+	alert('titre cliclqu');
+	e.stopPropagation();
+});
